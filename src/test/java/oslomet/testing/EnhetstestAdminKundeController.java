@@ -6,7 +6,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import oslomet.testing.API.AdminKundeController;
+import oslomet.testing.API.BankController;
 import oslomet.testing.DAL.AdminRepository;
+import oslomet.testing.DAL.BankRepository;
 import oslomet.testing.Models.Konto;
 import oslomet.testing.Models.Kunde;
 import oslomet.testing.Sikkerhet.Sikkerhet;
@@ -21,4 +23,17 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EnhetstestAdminKundeController {
+
+    @InjectMocks
+    // denne skal testes
+    private AdminKundeController aKuC;
+
+    @Mock
+    // denne skal Mock'es
+    private AdminRepository rep;
+
+    @Mock
+    // denne skal Mock'es
+    private Sikkerhet sjekk;
+
 }

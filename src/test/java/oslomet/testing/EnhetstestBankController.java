@@ -34,6 +34,18 @@ public class EnhetstestBankController {
     // denne skal Mock'es
     private Sikkerhet sjekk;
 
+    //WiP
+    @Test
+    public void hentTransaksjoner_loggetInn(){
+
+    }
+
+    //WiP
+    @Test
+    public void hentTransaksjoner_ikkeLoggetInn(){
+
+    }
+
     @Test
     public void hentKundeInfo_loggetInn() {
 
