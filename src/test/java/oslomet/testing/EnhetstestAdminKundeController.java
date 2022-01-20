@@ -63,7 +63,7 @@ public class EnhetstestAdminKundeController {
         alleKunder.add(kunde1);
         alleKunder.add(kunde2);
 
-        when(sjekk.loggetInn()).thenReturn("01010110523");
+        when(sjekk.loggetInn()).thenReturn("Admin");
         when(rep.hentAlleKunder()).thenReturn(alleKunder);
 
         assertEquals(alleKunder, adminKundeController.hentAlle());
