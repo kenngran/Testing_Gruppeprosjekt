@@ -103,7 +103,7 @@ public class EnhetstestAdminKundeController {
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
 
-        when(sjekk.loggetInn()).thenReturn("01010110523");
+        when(sjekk.loggetInn()).thenReturn("Admin");
         when(rep.registrerKunde(enKunde)).thenReturn("Kunde lagret");
 
         // act
@@ -130,9 +130,19 @@ public class EnhetstestAdminKundeController {
     }
     @Test
     public void endre_loggetInn(){
+        // arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
+
+        when(sjekk.loggetInn()).thenReturn("Admin");
+        when(rep.registrerKunde(enKunde)).thenReturn("Kunde endret");
+
+        // act
+        String resultat = adminKundeController.lagreKunde(enKunde);
+
+        // assert
+        assertEquals("Kunde endret", resultat);
     }
 
     //---slett---//
