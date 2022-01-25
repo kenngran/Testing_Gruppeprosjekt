@@ -117,16 +117,8 @@ public class EnhetstestBankController {
     public void hentTransaksjonerLoggetInn() {
 
         // arrange
-        List<Transaksjon> transaksjoner = new ArrayList<>();
-        Transaksjon trans1 = new Transaksjon(390, "kamel");
-        Transaksjon trans2 = new Transaksjon(870, "rev");
-        Transaksjon trans3 = new Transaksjon(120, "dromedar");
-        transaksjoner.add(trans1);
-        transaksjoner.add(trans2);
-        transaksjoner.add(trans3);
-
         Konto enKonto = new Konto("105010123456", "12345678901",
-                1000, "Lønnskonto", "NOK", transaksjoner);
+                1000, "Lønnskonto", "NOK", null);
 
         String fraDato = "kamel";
 
