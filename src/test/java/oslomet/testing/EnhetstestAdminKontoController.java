@@ -46,7 +46,9 @@ public class EnhetstestAdminKontoController {
 
     @Test
     public void hentAlleKonti_loggetInn(){
-
+        // arrange
+        // act
+        // assert
     }
 
     @Test
