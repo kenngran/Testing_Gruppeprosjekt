@@ -71,7 +71,9 @@ public class EnhetstestAdminKundeController {
         when(sjekk.loggetInn()).thenReturn("Admin"); //Later som vi logger inn
         when(rep.hentAlleKunder()).thenReturn(alleKunder); //Later som listen alleKunder vi laget eksisterer i rep
 
-        assertEquals(alleKunder, adminKundeController.hentAlle());
+        List<Kunde> resultat = adminKundeController.hentAlle();
+
+        assertEquals(alleKunder, resultat);
     }
 
     //---lagreKunde---//
@@ -88,6 +90,7 @@ public class EnhetstestAdminKundeController {
 
         assertEquals("Ikke logget inn", resultat); //assert - resultatet du fikk er forventet
     }
+
     @Test
     public void lagreKunde_loggetInn(){
         Kunde enKunde = new Kunde("01010110523",
