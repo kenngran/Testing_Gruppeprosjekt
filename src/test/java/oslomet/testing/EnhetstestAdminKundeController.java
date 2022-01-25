@@ -122,6 +122,7 @@ public class EnhetstestAdminKundeController {
                 "Asker", "22224444", "HeiHei");
 
         when(sjekk.loggetInn()).thenReturn(null);
+        when(rep.registrerKunde(enKunde)).thenReturn("OK");
 
         String resultat = adminKundeController.endre(enKunde);
 
