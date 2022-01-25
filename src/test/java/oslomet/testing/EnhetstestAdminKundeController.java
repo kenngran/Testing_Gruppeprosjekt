@@ -154,5 +154,14 @@ public class EnhetstestAdminKundeController {
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
+
+        when(sjekk.loggetInn()).thenReturn("Admin");
+        when(rep.slettKunde("01010110523")).thenReturn("OK");
+
+        // act
+        String resultat = adminKundeController.slett("01010110523");
+
+        // assert
+        assertEquals("OK", resultat);
     }
 }
