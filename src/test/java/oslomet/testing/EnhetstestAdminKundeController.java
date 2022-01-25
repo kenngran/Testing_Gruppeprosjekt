@@ -66,7 +66,9 @@ public class EnhetstestAdminKundeController {
         when(sjekk.loggetInn()).thenReturn("Admin");
         when(rep.hentAlleKunder()).thenReturn(alleKunder);
 
-        assertEquals(alleKunder, adminKundeController.hentAlle());
+        List<Kunde> resultat = adminKundeController.hentAlle();
+
+        assertEquals(alleKunder, resultat);
     }
 
     //---lagreKunde---//
@@ -83,6 +85,7 @@ public class EnhetstestAdminKundeController {
 
         assertEquals("Ikke logget inn", resultat);
     }
+
     @Test
     public void lagreKunde_loggetInn(){
         Kunde enKunde = new Kunde("01010110523",
