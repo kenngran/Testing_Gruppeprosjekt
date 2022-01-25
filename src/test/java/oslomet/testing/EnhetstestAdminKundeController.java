@@ -104,6 +104,7 @@ public class EnhetstestAdminKundeController {
                 "Asker", "22224444", "HeiHei");
 
         when(sjekk.loggetInn()).thenReturn("01010110523");
+        when(rep.registrerKunde(enKunde)).thenReturn("Kunde lagret");
 
         // act
         String resultat = adminKundeController.lagreKunde(enKunde);
@@ -122,7 +123,6 @@ public class EnhetstestAdminKundeController {
                 "Asker", "22224444", "HeiHei");
 
         when(sjekk.loggetInn()).thenReturn(null);
-        when(rep.registrerKunde(enKunde)).thenReturn("OK");
 
         String resultat = adminKundeController.endre(enKunde);
 
