@@ -85,15 +85,15 @@ public class EnhetstestAdminKundeController {
         //arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
-                "Asker", "22224444", "HeiHei"); //arrange
+                "Asker", "22224444", "HeiHei");
 
-        when(sjekk.loggetInn()).thenReturn(null); //arrange
+        when(sjekk.loggetInn()).thenReturn(null);
 
         // act
-        String resultat = adminKundeController.lagreKunde(enKunde); //act
+        String resultat = adminKundeController.lagreKunde(enKunde);
 
         //assert
-        assertEquals("Ikke logget inn", resultat); //assert - resultatet du fikk er forventet
+        assertEquals("Ikke logget inn", resultat);
     }
 
     @Test
@@ -103,9 +103,13 @@ public class EnhetstestAdminKundeController {
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
 
+        when(sjekk.loggetInn()).thenReturn("01010110523");
+
         // act
+        String resultat = adminKundeController.lagreKunde(enKunde);
 
         // assert
+        assertEquals("Kunde lagret", resultat);
     }
 
     //---endre---//
