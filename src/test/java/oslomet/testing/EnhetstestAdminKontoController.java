@@ -33,7 +33,7 @@ public class EnhetstestAdminKontoController {
 
     //WiP
     @Test
-    public void hentAlleKonti(){
+    public void hentAlleKonti_ikkeLoggetInn(){
         // arrange
         when(sjekk.loggetInn()).thenReturn(null);
 
@@ -43,5 +43,53 @@ public class EnhetstestAdminKontoController {
         // assert
         assertNull(resultat);
     }
+
+    @Test
+    public void hentAlleKonti_loggetInn(){
+
+    }
+
+    @Test
+    public void registrerKonto_ikkeLoggetInn(){
+        // arrange
+        // act
+        // assert
+    }
+
+    @Test
+    public void registrerKonto_loggetInn(){
+        // arrange
+        // act
+        // assert
+    }
+
+    @Test
+    public void endreKonto_ikkeLoggetInn(){
+        // arrange
+        // act
+        // assert
+    }
+
+    @Test
+    public void endreKonto_LoggetInn(){
+        // arrange
+        // act
+        // assert
+    }
+
+    @Test
+    public void slettKonto_ikkeLoggetInn(){
+        // arrange
+        // act
+        // assert
+    }
+
+    @Test
+    public void slettKonto_loggetInn(){
+        // arrange
+        // act
+        // assert
+    }
+
 }
 
