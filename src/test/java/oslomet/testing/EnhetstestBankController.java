@@ -112,5 +112,41 @@ public class EnhetstestBankController {
         // assert
         assertNull(resultat);
     }
+
+       @Test
+    public void hentTransaksjonerLoggetInn() {
+
+        // arrange
+        Konto enKonto = new Konto("105010123456", "12345678901",
+                1000, "Lønnskonto", "NOK", null);
+
+        String fraDato = "kamel";
+
+        String tilDato = "dromedar";
+
+        when(sjekk.loggetInn()).thenReturn("12345678901");
+
+        when(repository.hentTransaksjoner("12345678901", fraDato, tilDato)).thenReturn(enKonto);
+
+        // act
+        Konto resultat = bankController.hentTransaksjoner("12345678901", fraDato, tilDato);
+
+        // assert
+        assertEquals(enKonto, resultat);
+    }
+
+    @Test
+    public void hentTransaksjonerIkkeloggetInn() {
+
+        // arrange
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        Konto resultat = bankController.hentTransaksjoner("runa", "hacker", "alt");
+
+        // assert
+        assertNull(resultat);
+
+    }
 }
 
