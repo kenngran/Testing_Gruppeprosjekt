@@ -117,22 +117,34 @@ public class EnhetstestAdminKundeController {
     //DONE
     @Test
     public void endre_ikkeLoggetInn(){
-
+        // arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
 
         when(sjekk.loggetInn()).thenReturn(null);
 
+        // act
         String resultat = adminKundeController.endre(enKunde);
 
+        //assert
         assertEquals("Ikke logget inn", resultat);
     }
     @Test
     public void endre_loggetInn(){
+        // arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
+
+        when(sjekk.loggetInn()).thenReturn("admin");
+        when(rep.registrerKunde(enKunde)).thenReturn("Kunde endret");
+
+        // act
+        String resultat = adminKundeController.lagreKunde(enKunde);
+
+        // assert
+        assertEquals("Kunde endret", resultat);
     }
 
     //---slett---//
