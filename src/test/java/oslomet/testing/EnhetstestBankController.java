@@ -150,9 +150,75 @@ public class EnhetstestBankController {
     }
 
     //Hent Saldi
+    //SJEKK OM DISSE KJØRER
+    @Test
+    public void hentSaldiLoggetInn()  {
+       
+        // arrange
+        List<Konto> saldi = new ArrayList<>();
+        Konto konto1 = new Konto("105010123456", "01010110523",
+                20320, "Lønnskonto", "NOK", null);
+        Konto konto2 = new Konto("105010123456", "12345678901",
+                10000, "Sparekonto", "NOK", null);
+        saldi.add(konto1);
+        saldi.add(konto2);
+
+        when(sjekk.loggetInn()).thenReturn("01010110523");
+
+        when(repository.hentKonti("01010110523")).thenReturn(saldi);
+
+        // act
+        List<Konto> resultat = bankController.Saldi();
+
+        // assert
+        assertEquals(saldi, resultat);
+    }
+
+    @Test
+    public void hentSaldiIkkeLoggetInn() {
+
+        //arrange
+        when(sjekk.loggetInn()).thenReturn(null);
+        
+        //act
+        List<Konto> resultat = bankController.hentSaldi();
+
+        //assert
+        assertNull(resultat);
+    }
 
     //Registrere betaling
+    //SJEKK OM DISSE KJØRER
+    @Test
+    public void registrerBetalingLoggetInn() {
+
+        //arrange
+       Transaksjon betaling = new Transaksjon (3, "1243567483 til 234859300", 904, "kamel", "Middag på byen", "avventer", "1243567483");
+
+        when(sjekk.loggetInn()).thenReturn("01234567891");
+        when(repository.registrerBetaling("01234567891")).thenReturn(betaling);
+
+        //act
+        Transaksjon resultat = bankController.registrerBetaling(betaling);
+
+        //assert
+        assertEquals("Betaling registrert", resultat);
+    }
+
+    @Test
+    public void registrerBetalingIkkeLoggetInn() {
+
+    }
+
     //Hent betalinger
+    //SJEKK OM DISSE KJØRER
+
+    @Test
+    public void hentBetalingerLoggetInn() {
+
+    }
+
     //Utfør betalinger
+    //
 }
 
