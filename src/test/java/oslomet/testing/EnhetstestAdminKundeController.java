@@ -71,8 +71,10 @@ public class EnhetstestAdminKundeController {
         when(sjekk.loggetInn()).thenReturn("Admin"); //Later som vi logger inn
         when(rep.hentAlleKunder()).thenReturn(alleKunder); //Later som listen alleKunder vi laget eksisterer i rep
 
+        // act
         List<Kunde> resultat = adminKundeController.hentAlle();
 
+        // assert
         assertEquals(alleKunder, resultat);
     }
 
@@ -80,22 +82,30 @@ public class EnhetstestAdminKundeController {
     //DONE
     @Test
     public void lagreKunde_ikkeLoggetInn(){
+        //arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei"); //arrange
 
         when(sjekk.loggetInn()).thenReturn(null); //arrange
 
+        // act
         String resultat = adminKundeController.lagreKunde(enKunde); //act
 
+        //assert
         assertEquals("Ikke logget inn", resultat); //assert - resultatet du fikk er forventet
     }
 
     @Test
     public void lagreKunde_loggetInn(){
+        // arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
+
+        // act
+
+        // assert
     }
 
     //---endre---//
