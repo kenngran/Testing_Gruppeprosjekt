@@ -149,18 +149,22 @@ public class EnhetstestAdminKundeController {
     //DONE
     @Test
     public void slett_ikkeLoggetInn(){
+        // arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
 
         when(sjekk.loggetInn()).thenReturn(null);
 
+        // act
         String resultat = adminKundeController.slett(enKunde.getPersonnummer());
 
+        // assert
         assertEquals("Ikke logget inn", resultat);
     }
     @Test
     public void slett_loggetInn(){
+        // arrange
         Kunde enKunde = new Kunde("01010110523",
                 "Lene", "Jensen", "Askerveien 22", "3270",
                 "Asker", "22224444", "HeiHei");
