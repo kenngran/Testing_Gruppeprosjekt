@@ -189,7 +189,6 @@ public class EnhetstestBankController {
     }
 
     //Registrer betaling
-    //Fiks denne!
     @Test
     public void registrerBetalingLoggetInn() {
 
@@ -209,7 +208,18 @@ public class EnhetstestBankController {
 
     @Test
     public void registrerBetalingIkkeLoggetInn() {
-        
+
+        //arrange
+        Transaksjon betaling = new Transaksjon (3, "1243567483 til 234859300", 904,
+                "kamel", "Middag på byen", "avventer", "1243567483");
+
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        String resultat = bankController.registrerBetaling(betaling);
+
+        //assert
+        assertNull(resultat);
     }
 
     //Hent betalinger
@@ -239,7 +249,91 @@ public class EnhetstestBankController {
         assertEquals(betalinger, resultat);
     }
 
+    @Test
+    public void hentBetalingerIkkeLoggetInn() {
+
+        //arrange
+        List<Transaksjon> betalinger = new ArrayList<>();
+        Transaksjon betaling1 = new Transaksjon(1, "23847564599 til 76958473652", 506.99,
+                "01.11.2021", "Mobilabonnement", "avventer", "76958473652");
+        Transaksjon betaling2 = new Transaksjon(2, "23847564599 til 76958473652", 67.50,
+                "07.01.2022", "Ukelønn", "avventer", "76958473652");
+        Transaksjon betaling3 = new Transaksjon(3, "1243567483 til 234859300", 904,
+                "kamel", "Middag på byen", "avventer", "76958473652");
+        betalinger.add(betaling1);
+        betalinger.add(betaling2);
+        betalinger.add(betaling3);
+
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        List<Transaksjon> resultat = bankController.hentBetalinger();
+
+        //assert
+        assertNull(resultat);
+    }
+
     //Utfør betalinger
+    @Test
+    public void utførBetalingerLoggetInn() {
+
+        //arrange
+        List<Transaksjon> betalinger = new ArrayList<>();
+        Transaksjon betaling1 = new Transaksjon(1, "23847564599 til 76958473652", 506.99,
+                "01.11.2021", "Mobilabonnement", "avventer", "76958473652");
+        Transaksjon betaling2 = new Transaksjon(2, "23847564599 til 76958473652", 67.50,
+                "07.01.2022", "Ukelønn", "avventer", "76958473652");
+        Transaksjon betaling3 = new Transaksjon(3, "1243567483 til 234859300", 904,
+                "kamel", "Middag på byen", "avventer", "76958473652");
+        betalinger.add(betaling1);
+        betalinger.add(betaling2);
+        betalinger.add(betaling3);
+
+        int txID = 2;
+
+        when(sjekk.loggetInn()).thenReturn("03129843956");
+        when(repository.utforBetaling(txID)).thenReturn("OK");
+        when(repository.hentBetalinger("03129843956")).thenReturn(betalinger);
+
+        //act
+        List<Transaksjon> resultat = bankController.utforBetaling(txID);
+
+        //assert
+        assertEquals(betalinger, resultat);
+    }
+
+    @Test
+    public void utførBetalingerIkkeLoggetInn() {
+
+        //arrange
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        List<Transaksjon> resultat = bankController.utforBetaling(3);
+
+        //assert
+        assertNull(resultat);
+    }
+
     //Endre kundeinfo
+    @Test
+    public void endreKundeinfoLoggetInn() {
+
+        // arrange
+        Kunde innKunde = new Kunde("01010110523",
+                "Lene", "Jensen", "Askerveien 22", "3270",
+                "Asker", "22224444", "HeiHei");
+
+        when(sjekk.loggetInn()).thenReturn("01010110523");
+
+        when(repository.endreKundeInfo(innKunde)).thenReturn("OK");
+
+        // act
+        String resultat = bankController.endre(innKunde);
+
+        // assert
+        assertEquals("OK", resultat);
+    }
+
 }
 
