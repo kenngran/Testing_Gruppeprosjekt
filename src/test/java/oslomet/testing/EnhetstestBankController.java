@@ -9,6 +9,7 @@ import oslomet.testing.API.BankController;
 import oslomet.testing.DAL.BankRepository;
 import oslomet.testing.Models.Konto;
 import oslomet.testing.Models.Kunde;
+import oslomet.testing.Models.Transaksjon;
 import oslomet.testing.Sikkerhet.Sikkerhet;
 
 import java.util.ArrayList;
@@ -168,7 +169,7 @@ public class EnhetstestBankController {
         when(repository.hentKonti("01010110523")).thenReturn(saldi);
 
         // act
-        List<Konto> resultat = bankController.Konti();
+        List<Konto> resultat = bankController.hentSaldi();
 
         // assert
         assertEquals(saldi, resultat);
@@ -187,22 +188,23 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
-    //Registrere betaling
-    //SJEKK OM DISSE KJØRER
+    //Registrer betaling
+    //Fiks denne!
     @Test
     public void registrerBetalingLoggetInn() {
 
         //arrange
-       Transaksjon betaling = new Transaksjon (3, "1243567483 til 234859300", 904, "kamel", "Middag på byen", "avventer", "1243567483");
+       Transaksjon betaling = new Transaksjon (3, "1243567483 til 234859300", 904,
+               "kamel", "Middag på byen", "avventer", "1243567483");
 
         when(sjekk.loggetInn()).thenReturn("01234567891");
-        when(repository.registrerBetaling("01234567891")).thenReturn(betaling);
+        when(repository.registrerBetaling(betaling)).thenReturn("OK");
 
         //act
-        Transaksjon resultat = bankController.registrerBetaling(betaling);
+        String resultat = bankController.registrerBetaling(betaling);
 
         //assert
-        assertEquals("Betaling registrert", resultat);
+        assertEquals("OK", resultat);
     }
 
     @Test
@@ -211,14 +213,33 @@ public class EnhetstestBankController {
     }
 
     //Hent betalinger
-    //SJEKK OM DISSE KJØRER
 
     @Test
     public void hentBetalingerLoggetInn() {
 
+        //arrange
+        List<Transaksjon> betalinger = new ArrayList<>();
+        Transaksjon betaling1 = new Transaksjon(1, "23847564599 til 76958473652", 506.99,
+                "01.11.2021", "Mobilabonnement", "avventer", "76958473652");
+        Transaksjon betaling2 = new Transaksjon(2, "23847564599 til 76958473652", 67.50,
+                "07.01.2022", "Ukelønn", "avventer", "76958473652");
+        Transaksjon betaling3 = new Transaksjon(3, "1243567483 til 234859300", 904,
+                "kamel", "Middag på byen", "avventer", "76958473652");
+        betalinger.add(betaling1);
+        betalinger.add(betaling2);
+        betalinger.add(betaling3);
+
+        when(sjekk.loggetInn()).thenReturn("09059445763");
+        when(repository.hentBetalinger("09059445763")).thenReturn(betalinger);
+
+        //act
+        List<Transaksjon> resultat = bankController.hentBetalinger();
+
+        //assert
+        assertEquals(betalinger, resultat);
     }
 
     //Utfør betalinger
-    //
+    //Endre kundeinfo
 }
 
