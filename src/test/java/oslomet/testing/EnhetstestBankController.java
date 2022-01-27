@@ -168,7 +168,7 @@ public class EnhetstestBankController {
         when(repository.hentKonti("01010110523")).thenReturn(saldi);
 
         // act
-        List<Konto> resultat = bankController.Saldi();
+        List<Konto> resultat = bankController.Konti();
 
         // assert
         assertEquals(saldi, resultat);
@@ -207,7 +207,7 @@ public class EnhetstestBankController {
 
     @Test
     public void registrerBetalingIkkeLoggetInn() {
-
+        
     }
 
     //Hent betalinger
