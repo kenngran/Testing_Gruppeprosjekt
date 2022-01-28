@@ -35,17 +35,7 @@ public class EnhetstestBankController {
     // denne skal Mock'es
     private Sikkerhet sjekk;
 
-    //WiP
-    @Test
-    public void hentTransaksjoner_loggetInn(){
 
-    }
-
-    //WiP
-    @Test
-    public void hentTransaksjoner_ikkeLoggetInn(){
-
-    }
 
     @Test
     public void hentKundeInfo_loggetInn() {
@@ -333,6 +323,23 @@ public class EnhetstestBankController {
 
         // assert
         assertEquals("OK", resultat);
+    }
+
+    @Test
+    public void endreKundeinfoIkkeLoggetInn() {
+
+        //arrange
+        Kunde innKunde = new Kunde("01010110523",
+                "Lene", "Jensen", "Askerveien 22", "3270",
+                "Asker", "22224444", "HeiHei");
+
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        //act
+        String resultat = bankController.endre(innKunde);
+
+        //assert
+        assertNull(resultat);
     }
 
 }
