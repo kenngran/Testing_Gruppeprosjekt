@@ -1,11 +1,16 @@
 package oslomet.testing.DAL;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Repository;
 import oslomet.testing.Models.Konto;
 import oslomet.testing.Models.Kunde;
+
+import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
@@ -13,6 +18,19 @@ public class AdminRepository {
 
     @Autowired
     private JdbcTemplate db;
+
+    public String initDB(DataSource dataSource){
+        try{
+            Resource skjema = new ClassPathResource("schema.sql");
+            Resource data = new ClassPathResource("data.sql");
+            ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(skjema,data);
+            databasePopulator.execute(dataSource);
+            return "OK";
+        }
+        catch(Exception e){
+            return "Feil";
+        }
+    }
 
     public List<Kunde> hentAlleKunder(){
          try{
