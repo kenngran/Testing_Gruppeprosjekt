@@ -7,6 +7,8 @@ import oslomet.testing.DAL.BankRepository;
 
 import javax.servlet.http.HttpSession;
 
+//Husk å enhetsteste denne også!!!!!!
+
 @RestController
 public class Sikkerhet {
     @Autowired
