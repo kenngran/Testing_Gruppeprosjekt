@@ -73,13 +73,13 @@ public class EnhetstestAdminKontoController {
         Konto enKonto = new Konto("105010123456", "12345678901",
                 1000, "Lønnskonto", "NOK", null);
 
-        when(sjekk.loggetInn()).thenReturn("Ikke innlogget");
+        when(sjekk.loggetInn()).thenReturn(null);
 
         // act
         String resultat = adminKontoController.registrerKonto(enKonto);
 
         // assert
-        assertNull(resultat);
+        assertEquals("Ikke innlogget", resultat);
     }
 
     @Test
@@ -104,13 +104,13 @@ public class EnhetstestAdminKontoController {
         Konto enKonto = new Konto("105010123456", "12345678901",
                 1000, "Lønnskonto", "NOK", null);
 
-        when(sjekk.loggetInn()).thenReturn("Ikke innlogget");
+        when(sjekk.loggetInn()).thenReturn(null);
 
         // act
         String resultat = adminKontoController.endreKonto(enKonto);
 
         // assert
-        assertNull(resultat);
+        assertEquals("Ikke innlogget",resultat);
     }
 
     @Test

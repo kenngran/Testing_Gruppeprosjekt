@@ -136,13 +136,13 @@ public class EnhetstestAdminKundeController {
                 "Asker", "22224444", "HeiHei");
 
         when(sjekk.loggetInn()).thenReturn("Admin");
-        when(rep.registrerKunde(enKunde)).thenReturn("Kunde endret");
+        when(rep.endreKundeInfo(enKunde)).thenReturn("OK");
 
         // act
-        String resultat = adminKundeController.lagreKunde(enKunde);
+        String resultat = adminKundeController.endre(enKunde);
 
         // assert
-        assertEquals("Kunde endret", resultat);
+        assertEquals("OK", resultat);
     }
 
     //---slett---//

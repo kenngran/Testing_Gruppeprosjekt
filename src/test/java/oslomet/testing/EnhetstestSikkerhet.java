@@ -28,7 +28,7 @@ public class EnhetstestSikkerhet {
     private HttpSession session;
 
     @Test
-    public void loggInn() {
+    public void sjekkLoggInn() {
 
         // arrange
         when(repository.sjekkLoggInn("01010110523","HeiHei")).thenReturn("OK");
@@ -39,6 +39,44 @@ public class EnhetstestSikkerhet {
         //assert
         assertEquals("OK", resultatLoggInn);
     }
+
+    @Test
+    public void sjekkLoggInn_feilPass() {
+
+        // arrange
+
+        //act
+        String resultatLoggInn = sjekk.sjekkLoggInn("01010110523","1");
+
+        //assert
+        assertEquals("Feil i passord", resultatLoggInn);
+    }
+
+    @Test
+    public void sjekkLoggInn_feilPers() {
+
+        // arrange
+
+        //act
+        String resultatLoggInn = sjekk.sjekkLoggInn("01010","HeiHei");
+
+        //assert
+        assertEquals("Feil i personnummer", resultatLoggInn);
+    }
+
+    @Test
+    public void sjekkLoggInn_ikkeEksist() {
+
+        // arrange
+        when(repository.sjekkLoggInn("01010110542","HeiHei")).thenReturn("Feil");
+
+        //act
+        String resultatLoggInn = sjekk.sjekkLoggInn("01010110542","HeiHei");
+
+        //assert
+        assertEquals("Feil i personnummer eller passord", resultatLoggInn);
+    }
+
 
     @Test
     public void loggetInn() {
@@ -63,5 +101,17 @@ public class EnhetstestSikkerhet {
 
         //assert
         assertEquals("Logget inn", resultatLoggInn);
+    }
+
+    @Test
+    public void loggInnAdmin_feil() {
+
+        // arrange
+
+        //act
+        String resultatLoggInn = sjekk.loggInnAdmin("Admi","Admi");
+
+        //assert
+        assertEquals("Ikke logget inn", resultatLoggInn);
     }
 }
