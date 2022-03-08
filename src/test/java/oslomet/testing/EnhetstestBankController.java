@@ -154,9 +154,9 @@ public class EnhetstestBankController {
         saldi.add(konto1);
         saldi.add(konto2);
 
-        when(sjekk.loggetInn()).thenReturn("01010110523");
+        when(sjekk.loggetInn()).thenReturn("105010123456");
 
-        when(repository.hentKonti("01010110523")).thenReturn(saldi);
+        when(repository.hentSaldi("105010123456")).thenReturn(saldi);
 
         // act
         List<Konto> resultat = bankController.hentSaldi();
